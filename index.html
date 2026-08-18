@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Моя стартовая страница</title>
+<style>
+html, body {
+margin: 0;
+padding: 0;
+width: 100%;
+height: 100%;
+background-color: #121212;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+color: #ffffff;
+font-family: Arial, sans-serif;
+box-sizing: border-box;
+transition: background 0.3s ease;
+}
+body {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 35px;
+}
+.settings-btn {
+position: fixed;
+top: 20px;
+right: 20px;
+background-color: #1e1e1e;
+border: 1px solid #333;
+color: #fff;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+cursor: pointer;
+font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: 0.2s;
+z-index: 100;
+}
+.settings-btn:hover {
+background-color: #2a2a2a;
+border-color: #555;
+transform: rotate(90deg);
+}
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 200;
+}
+.modal-content {
+background-color: #1e1e1e;
+padding: 30px;
+border-radius: 12px;
+border: 1px solid #333;
+box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+width: 320px;
+position: relative;
+max-height: 85vh;
+overflow-y: auto;
+}
+.close-modal {
+position: absolute;
+top: 12px;
+right: 15px;
+background: none;
+border: none;
+color: #888;
+font-size: 20px;
+cursor: pointer;
+}
+.close-modal:hover {
+color: #fff;
+}
+form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+form h3 {
+margin: 0 0 5px 0;
+font-size: 18px;
+font-weight: normal;
+text-align: center;
+}
+.section-title {
+font-size: 14px;
+color: #888;
+margin: 5px 0 0 0;
+border-top: 1px solid #333;
+padding-top: 10px;
+}
+input[type="text"], input[type="url"], input[type="search"] {
+padding: 12px;
+background-color: #121212;
+border: 1px solid #333;
+color: #fff;
+border-radius: 6px;
+font-size: 14px;
+}
+.search-container {
+width: 90%;
+max-width: 550px;
+display: flex;
+justify-content: center;
+}
+.search-form {
+width: 100%;
+flex-direction: row;
+gap: 0;
+}
+.search-input {
+width: 100%;
+padding: 15px 25px !important;
+font-size: 16px !important;
+border-radius: 30px !important;
+border: 1px solid rgba(255, 255, 255, 0.15) !important;
+background-color: rgba(255, 255, 255, 0.07) !important;
+backdrop-filter: blur(15px);
+box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+outline: none;
+transition: 0.2s ease;
+}
+.search-input:focus {
+border-color: #3b82f6 !important;
+background-color: rgba(20, 20, 20, 0.85) !important;
+box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+}
+.bg-control-container {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.bg-control-group {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+input[type="color"] {
+background: none;
+border: 1px solid #333;
+cursor: pointer;
+width: 45px;
+height: 42px;
+padding: 0;
+border-radius: 6px;
+flex-shrink: 0;
+}
+.bg-url-input {
+flex-grow: 1;
+}
+.reset-bg-btn {
+padding: 12px;
+background-color: #332222;
+border: 1px solid #553333;
+color: #ff8888;
+border-radius: 6px;
+cursor: pointer;
+font-size: 13px;
+font-weight: bold;
+}
+.reset-bg-btn:hover {
+background-color: #442222;
+}
+button[type="submit"] {
+padding: 12px;
+background-color: #3b82f6;
+border: none;
+color: white;
+border-radius: 6px;
+cursor: pointer;
+font-size: 14px;
+font-weight: bold;
+margin-top: 5px;
+}
+button[type="submit"]:hover {
+background-color: #2563eb;
+}
+.grid {
+display: flex;
+flex-wrap: wrap;
+gap: 25px;
+width: 90%;
+max-width: 1000px;
+justify-content: center;
+align-items: center;
+}
+.tile-container {
+position: relative;
+width: 120px;
+height: 120px;
+cursor: grab;
+transition: opacity 0.2s;
+}
+.tile-container.dragging {
+opacity: 0.4;
+cursor: grabbing;
+}
+.tile {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: rgba(30, 30, 30, 0.6);
+backdrop-filter: blur(8px);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 16px;
+width: 100%;
+height: 100%;
+text-decoration: none;
+color: #fff;
+transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+box-sizing: border-box;
+padding: 10px;
+text-align: center;
+}
+.tile:hover {
+background-color: rgba(40, 40, 40, 0.85);
+transform: translateY(-4px);
+border-color: rgba(255, 255, 255, 0.2);
+box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+.tile-icon {
+width: 38px;
+height: 38px;
+margin-bottom: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 32px;
+line-height: 1;
+}
+.tile-icon img {
+width: 100%;
+height: 100%;
+object-fit: contain;
+border-radius: 8px;
+}
+.tile-title {
+font-size: 13px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+width: 100%;
+color: #e0e0e0;
+}
+.action-btn {
+position: absolute;
+color: white;
+border: none;
+border-radius: 50%;
+width: 22px;
+height: 22px;
+cursor: pointer;
+font-size: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+opacity: 0;
+transition: opacity 0.2s, transform 0.1s;
+box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+z-index: 10;
+}
+.delete-btn {
+top: -6px;
+right: -6px;
+background-color: #ef4444;
+}
+.delete-btn:hover {
+background-color: #dc2626;
+transform: scale(1.1);
+}
+.edit-btn {
+top: -6px;
+left: -6px;
+background-color: #f59e0b;
+}
+.edit-btn:hover {
+background-color: #d97706;
+transform: scale(1.1);
+}
+.tile-container:hover .action-btn {
+opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="search-container">
+  <form id="searchForm" class="search-form" style="width: 100%;">
+    <input type="search" id="searchInput" class="search-input" placeholder="Поиск или адрес сайта..." list="searchSuggestions" autofocus autocomplete="off">
+    <datalist id="searchSuggestions"></datalist>
+  </form>
+</div>
+
+<button class="settings-btn" id="openModalBtn" title="Добавить сайт">+</button>
+
+<div class="modal-overlay" id="modalOverlay">
+<div class="modal-content">
+<button class="close-modal" id="closeModalBtn">×</button>
+<form id="siteForm">
+<h3 id="modalTitle">Новый ярлык</h3>
+<input type="text" id="siteName" placeholder="Название" required>
+<input type="url" id="siteUrl" placeholder="https://example.com" required>
+<input type="text" id="siteIcon" placeholder="Эмодзи или буква (пусто для авто)">
+<button type="submit" id="submitBtn">Добавить</button>
+
+<div class="section-title">Внешний вид страницы</div>
+<div class="bg-control-container">
+<div class="bg-control-group">
+<input type="color" id="bgColorPicker" value="#121212" title="Выбрать цвет фона">
+<input type="text" id="bgUrlInput" class="bg-url-input" placeholder="Ссылка на фото или имя файла (bg.jpg)">
+</div>
+<button type="button" class="reset-bg-btn" id="resetBgBtn" title="Сбросить фон">Сбросить фон</button>
+</div>
+</form>
+</div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const form = document.getElementById('siteForm');
+const nameInput = document.getElementById('siteName');
+const urlInput = document.getElementById('siteUrl');
+const iconInput = document.getElementById('siteIcon');
+const grid = document.getElementById('grid');
+const modalTitle = document.getElementById('modalTitle');
+const submitBtn = document.getElementById('submitBtn');
+
+const bgColorPicker = document.getElementById('bgColorPicker');
+const bgUrlInput = document.getElementById('bgUrlInput');
+const resetBgBtn = document.getElementById('resetBgBtn');
+
+const modal = document.getElementById('modalOverlay');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+
+const searchForm = document.getElementById('searchForm');
+const searchInput = document.getElementById('searchInput');
+const searchSuggestions = document.getElementById('searchSuggestions');
+
+let sites = JSON.parse(localStorage.getItem('mySites')) || [];
+let searchHistory = JSON.parse(localStorage.getItem('mySearchHistory')) || [];
+let editIndex = -1;
+let draggedItem = null;
+
+function updateSearchSuggestions() {
+  searchSuggestions.innerHTML = '';
+  const addedSuggestions = new Set();
+
+  sites.forEach(site => {
+    if (site.url) {
+      try {
+        const urlObj = new URL(site.url);
+        if (!addedSuggestions.has(urlObj.hostname)) {
+          const opt = document.createElement('option');
+          opt.value = urlObj.hostname;
+          searchSuggestions.appendChild(opt);
+          addedSuggestions.add(urlObj.hostname);
+        }
+        if (!addedSuggestions.has(site.url)) {
+          const opt = document.createElement('option');
+          opt.value = site.url;
+          searchSuggestions.appendChild(opt);
+          addedSuggestions.add(site.url);
+        }
+      } catch(e) {}
+    }
+  });
+
+  searchHistory.forEach(query => {
+    if (!addedSuggestions.has(query)) {
+      const opt = document.createElement('option');
+      opt.value = query;
+      searchSuggestions.appendChild(opt);
+      addedSuggestions.add(query);
+    }
+  });
+}
+
+searchForm.onsubmit = (e) => {
+  e.preventDefault();
+  let query = searchInput.value.trim();
+  if (!query) return;
+
+  const isUrl = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i.test(query);
+
+  if (isUrl) {
+    if (!/^https?:\/\//i.test(query)) {
+      query = 'https://' + query;
+    }
+    window.location.href = query;
+  } else {
+    if (!searchHistory.includes(query)) {
+      searchHistory.unshift(query);
+      if (searchHistory.length > 15) searchHistory.pop();
+      localStorage.setItem('mySearchHistory', JSON.stringify(searchHistory));
+    }
+    window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+  }
+};
+
+function applySavedBackground() {
+const savedBgType = localStorage.getItem('bgType');
+const savedBgValue = localStorage.getItem('bgValue');
+
+if (savedBgType === 'image' && savedBgValue) {
+document.body.style.backgroundImage = "url('" + savedBgValue + "')";
+bgUrlInput.value = savedBgValue;
+} else if (savedBgType === 'color' && savedBgValue) {
+document.body.style.backgroundImage = 'none';
+document.body.style.backgroundColor = savedBgValue;
+bgColorPicker.value = savedBgValue;
+bgUrlInput.value = '';
+} else {
+document.body.style.backgroundImage = 'none';
+document.body.style.backgroundColor = '#121212';
+bgColorPicker.value = '#121212';
+bgUrlInput.value = '';
+}
+}
+
+bgUrlInput.addEventListener('input', (e) => {
+const value = e.target.value.trim();
+if (value) {
+document.body.style.backgroundImage = "url('" + value + "')";
+localStorage.setItem('bgType', 'image');
+localStorage.setItem('bgValue', value);
+} else {
+const color = bgColorPicker.value;
+document.body.style.backgroundImage = 'none';
+document.body.style.backgroundColor = color;
+localStorage.setItem('bgType', 'color');
+localStorage.setItem('bgValue', color);
+}
+});
+
+bgColorPicker.addEventListener('input', (e) => {
+const color = e.target.value;
+document.body.style.backgroundImage = 'none';
+document.body.style.backgroundColor = color;
+bgUrlInput.value = '';
+localStorage.setItem('bgType', 'color');
+localStorage.setItem('bgValue', color);
+});
+
+resetBgBtn.addEventListener('click', () => {
+localStorage.removeItem('bgType');
+localStorage.removeItem('bgValue');
+applySavedBackground();
+});
+
+applySavedBackground();
+
+openModalBtn.onclick = () => {
+editIndex = -1;
+modalTitle.textContent = 'Новый ярлык';
+submitBtn.textContent = 'Добавить';
+nameInput.value = '';
+urlInput.value = '';
+iconInput.value = '';
+modal.style.display = 'flex';
+};
+
+closeModalBtn.onclick = () => modal.style.display = 'none';
+window.onclick = (e) => {
+if (e.target === modal) modal.style.display = 'none';
+};
+
+function render() {
+grid.innerHTML = '';
+sites.forEach((site, index) => {
+const container = document.createElement('div');
+container.className = 'tile-container';
+container.setAttribute('draggable', 'true');
+container.dataset.index = index;
+
+const a = document.createElement('a');
+a.href = site.url;
+a.className = 'tile';
+
+const icon = document.createElement('span');
+icon.className = 'tile-icon';
+
+if (site.icon) {
+icon.textContent = site.icon;
+} else {
+try {
+const urlObj = new URL(site.url);
+const img = document.createElement('img');
+img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + urlObj.hostname;
+img.alt = '';
+img.onerror = () => {
+icon.innerHTML = '';
+icon.textContent = site.name.charAt(0).toUpperCase();
+};
+icon.appendChild(img);
+} catch(e) {
+icon.textContent = site.name.charAt(0).toUpperCase();
+}
+}
+
+const title = document.createElement('span');
+title.className = 'tile-title';
+title.textContent = site.name;
+
+const del = document.createElement('button');
+del.textContent = '×';
+del.className = 'action-btn delete-btn';
+del.title = 'Удалить';
+del.onclick = (e) => {
+e.preventDefault();
+sites.splice(index, 1);
+saveAndRender();
+};
+
+const edit = document.createElement('button');
+edit.textContent = '✎';
+edit.className = 'action-btn edit-btn';
+edit.title = 'Редактировать';
+edit.onclick = (e) => {
+e.preventDefault();
+editIndex = index;
+modalTitle.textContent = 'Редактировать ярлык';
+submitBtn.textContent = 'Сохранить';
+nameInput.value = site.name;
+urlInput.value = site.url;
+iconInput.value = site.icon || '';
+modal.style.display = 'flex';
+};
+
+a.appendChild(icon);
+a.appendChild(title);
+container.appendChild(a);
+container.appendChild(del);
+container.appendChild(edit);
+
+container.addEventListener('dragstart', () => {
+draggedItem = container;
+container.classList.add('dragging');
+});
+
+container.addEventListener('dragend', () => {
+container.classList.remove('dragging');
+draggedItem = null;
+});
+
+container.addEventListener('dragover', (e) => {
+e.preventDefault();
+});
+
+container.addEventListener('drop', (e) => {
+e.preventDefault();
+if (draggedItem && draggedItem !== container) {
+const fromIndex = parseInt(draggedItem.dataset.index);
+const toIndex = parseInt(container.dataset.index);
+
+const [movedItem] = sites.splice(fromIndex, 1);
+sites.splice(toIndex, 0, movedItem);
+saveAndRender();
+}
+});
+
+grid.appendChild(container);
+});
+
+updateSearchSuggestions();
+}
+
+function saveAndRender() {
+localStorage.setItem('mySites', JSON.stringify(sites));
+render();
+}
+
+form.onsubmit = (e) => {
+e.preventDefault();
+const siteData = {
+name: nameInput.value,
+url: urlInput.value,
+icon: iconInput.value
+};
+
+if (editIndex === -1) {
+sites.push(siteData);
+} else {
+sites[editIndex] = siteData;
+}
+modal.style.display = 'none';
+saveAndRender();
+};
+
+render();
+</script>
+</body>
+</html>
