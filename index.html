@@ -63,11 +63,11 @@ z-index: 200;
 }
 .modal-content {
 background-color: #1e1e1e;
-padding: 30px;
+padding: 26px;
 border-radius: 12px;
 border: 1px solid #333;
 box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-width: 320px;
+width: 350px;
 position: relative;
 max-height: 85vh;
 overflow-y: auto;
@@ -88,7 +88,7 @@ color: #fff;
 form {
 display: flex;
 flex-direction: column;
-gap: 15px;
+gap: 14px;
 }
 form h3 {
 margin: 0 0 5px 0;
@@ -97,11 +97,13 @@ font-weight: normal;
 text-align: center;
 }
 .section-title {
-font-size: 14px;
+font-size: 13px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
 color: #888;
-margin: 5px 0 0 0;
+margin: 8px 0 0 0;
 border-top: 1px solid #333;
-padding-top: 10px;
+padding-top: 12px;
 }
 input[type="text"], input[type="url"], input[type="search"] {
 padding: 12px;
@@ -110,6 +112,11 @@ border: 1px solid #333;
 color: #fff;
 border-radius: 6px;
 font-size: 14px;
+box-sizing: border-box;
+}
+input[type="text"]:focus, input[type="url"]:focus {
+border-color: #3b82f6;
+outline: none;
 }
 .search-container {
 width: 90%;
@@ -163,7 +170,7 @@ flex-shrink: 0;
 flex-grow: 1;
 }
 .reset-bg-btn {
-padding: 12px;
+padding: 10px;
 background-color: #332222;
 border: 1px solid #553333;
 color: #ff8888;
@@ -171,6 +178,7 @@ border-radius: 6px;
 cursor: pointer;
 font-size: 13px;
 font-weight: bold;
+transition: 0.2s;
 }
 .reset-bg-btn:hover {
 background-color: #442222;
@@ -185,10 +193,150 @@ cursor: pointer;
 font-size: 14px;
 font-weight: bold;
 margin-top: 5px;
+transition: 0.2s;
 }
 button[type="submit"]:hover {
 background-color: #2563eb;
 }
+
+/* Backup and Sync Controls */
+.backup-container {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.backup-btn-group {
+display: flex;
+gap: 8px;
+}
+.backup-action-btn {
+flex: 1;
+padding: 10px;
+background-color: #262626;
+border: 1px solid #404040;
+color: #e0e0e0;
+border-radius: 6px;
+cursor: pointer;
+font-size: 13px;
+font-weight: 500;
+transition: 0.2s;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+}
+.backup-action-btn:hover {
+background-color: #333;
+border-color: #555;
+color: #fff;
+}
+.restore-btn {
+background-color: #1a365d;
+border-color: #2b6cb0;
+color: #bee3f8;
+width: 100%;
+}
+.restore-btn:hover {
+background-color: #2b6cb0;
+color: #fff;
+}
+.backup-status-text {
+font-size: 12px;
+color: #888;
+line-height: 1.4;
+padding: 0 2px;
+}
+
+/* Recovery Banner */
+.recovery-banner {
+position: fixed;
+top: 18px;
+left: 50%;
+transform: translateX(-50%);
+width: 90%;
+max-width: 580px;
+background: rgba(28, 28, 30, 0.95);
+backdrop-filter: blur(14px);
+border: 1px solid #3b82f6;
+border-radius: 10px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+padding: 12px 16px;
+z-index: 150;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+box-sizing: border-box;
+animation: bannerDrop 0.3s ease;
+}
+@keyframes bannerDrop {
+from { transform: translate(-50%, -20px); opacity: 0; }
+to { transform: translate(-50%, 0); opacity: 1; }
+}
+.recovery-text {
+font-size: 13px;
+color: #e2e8f0;
+line-height: 1.4;
+}
+.recovery-actions {
+display: flex;
+gap: 8px;
+flex-shrink: 0;
+}
+.recovery-btn-confirm {
+background-color: #3b82f6;
+color: #fff;
+border: none;
+padding: 8px 14px;
+border-radius: 6px;
+cursor: pointer;
+font-weight: bold;
+font-size: 13px;
+transition: 0.2s;
+}
+.recovery-btn-confirm:hover {
+background-color: #2563eb;
+}
+.recovery-btn-dismiss {
+background: transparent;
+color: #a0aec0;
+border: 1px solid #4a5568;
+padding: 8px 12px;
+border-radius: 6px;
+cursor: pointer;
+font-size: 13px;
+transition: 0.2s;
+}
+.recovery-btn-dismiss:hover {
+color: #fff;
+border-color: #718096;
+}
+
+/* Toast Notification */
+.toast {
+position: fixed;
+bottom: 30px;
+left: 50%;
+transform: translateX(-50%) translateY(50px);
+background: rgba(30, 30, 30, 0.96);
+backdrop-filter: blur(10px);
+border: 1px solid #3b82f6;
+color: #fff;
+padding: 10px 22px;
+border-radius: 30px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+font-size: 14px;
+z-index: 300;
+transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s ease;
+opacity: 0;
+pointer-events: none;
+text-align: center;
+}
+.toast.show {
+transform: translateX(-50%) translateY(0);
+opacity: 1;
+}
+
 .grid {
 display: flex;
 flex-wrap: wrap;
@@ -299,6 +447,18 @@ opacity: 1;
 </head>
 <body>
 
+<!-- Recovery Banner when localStorage is empty but backup exists -->
+<div id="recoveryBanner" class="recovery-banner" style="display: none;">
+  <div class="recovery-text">
+    ⚠️ <strong>Ярлыки не найдены в браузере.</strong><br>
+    Найдена резервная копия (<span id="recoveryCount">0</span> шт.) от <span id="recoveryDate"></span>.
+  </div>
+  <div class="recovery-actions">
+    <button id="recoveryRestoreBtn" class="recovery-btn-confirm">Восстановить</button>
+    <button id="recoveryDismissBtn" class="recovery-btn-dismiss">Закрыть</button>
+  </div>
+</div>
+
 <div class="search-container">
   <form id="searchForm" class="search-form" style="width: 100%;">
     <input type="search" id="searchInput" class="search-input" placeholder="Поиск или адрес сайта..." list="searchSuggestions" autofocus autocomplete="off">
@@ -306,7 +466,7 @@ opacity: 1;
   </form>
 </div>
 
-<button class="settings-btn" id="openModalBtn" title="Добавить сайт">+</button>
+<button class="settings-btn" id="openModalBtn" title="Настройки и ярлыки">⚙️</button>
 
 <div class="modal-overlay" id="modalOverlay">
 <div class="modal-content">
@@ -326,11 +486,25 @@ opacity: 1;
 </div>
 <button type="button" class="reset-bg-btn" id="resetBgBtn" title="Сбросить фон">Сбросить фон</button>
 </div>
+
+<div class="section-title">Резервная копия и синхронизация</div>
+<div class="backup-container">
+<div class="backup-btn-group">
+<button type="button" class="backup-action-btn" id="exportBtn" title="Скачать ярлыки и настройки в JSON-файл">📥 Экспорт (JSON)</button>
+<button type="button" class="backup-action-btn" id="importTriggerBtn" title="Загрузить ярлыки из JSON-файла">📤 Импорт (JSON)</button>
+<input type="file" id="importFileInput" accept=".json,application/json" style="display: none;">
+</div>
+<div id="autoBackupStatus" class="backup-status-text">Автокопия: проверяется...</div>
+<button type="button" class="backup-action-btn restore-btn" id="restoreAutoBackupBtn" style="display: none;">🔄 Восстановить из автокопии</button>
+</div>
 </form>
 </div>
 </div>
 
 <div class="grid" id="grid"></div>
+
+<!-- Toast notification popup -->
+<div id="toast" class="toast"></div>
 
 <script>
 const form = document.getElementById('siteForm');
@@ -353,11 +527,295 @@ const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('searchInput');
 const searchSuggestions = document.getElementById('searchSuggestions');
 
+const exportBtn = document.getElementById('exportBtn');
+const importTriggerBtn = document.getElementById('importTriggerBtn');
+const importFileInput = document.getElementById('importFileInput');
+const autoBackupStatus = document.getElementById('autoBackupStatus');
+const restoreAutoBackupBtn = document.getElementById('restoreAutoBackupBtn');
+
+const recoveryBanner = document.getElementById('recoveryBanner');
+const recoveryCount = document.getElementById('recoveryCount');
+const recoveryDate = document.getElementById('recoveryDate');
+const recoveryRestoreBtn = document.getElementById('recoveryRestoreBtn');
+const recoveryDismissBtn = document.getElementById('recoveryDismissBtn');
+const toast = document.getElementById('toast');
+
 let sites = JSON.parse(localStorage.getItem('mySites')) || [];
 let searchHistory = JSON.parse(localStorage.getItem('mySearchHistory')) || [];
 let editIndex = -1;
 let draggedItem = null;
+let toastTimeout = null;
 
+function showToast(message) {
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toast.textContent = message;
+  toast.classList.add('show');
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3500);
+}
+
+/* ==================== IndexedDB & Backup Subsystem ==================== */
+const DB_NAME = 'MyStartPageDB';
+const DB_VERSION = 1;
+const STORE_NAME = 'backups';
+
+function openBackupDB() {
+  return new Promise((resolve) => {
+    if (!window.indexedDB) return resolve(null);
+    try {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(STORE_NAME)) {
+          db.createObjectStore(STORE_NAME, { keyPath: 'id' });
+        }
+      };
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => resolve(null);
+    } catch (e) {
+      resolve(null);
+    }
+  });
+}
+
+async function saveBackupToIndexedDB(backupData) {
+  const db = await openBackupDB();
+  if (!db) return;
+  try {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    tx.objectStore(STORE_NAME).put({ id: 'latest_backup', ...backupData });
+  } catch (e) {
+    console.warn('IndexedDB save failed:', e);
+  }
+}
+
+async function getBackupFromIndexedDB() {
+  const db = await openBackupDB();
+  if (!db) return null;
+  return new Promise((resolve) => {
+    try {
+      const tx = db.transaction(STORE_NAME, 'readonly');
+      const req = tx.objectStore(STORE_NAME).get('latest_backup');
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    } catch (e) {
+      resolve(null);
+    }
+  });
+}
+
+function getLocalAutoBackup() {
+  try {
+    return JSON.parse(localStorage.getItem('mySites_autoBackup')) || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+// Persist backup without overwriting non-empty backups with empty ones
+async function persistAutoBackup(currentSites) {
+  if (!Array.isArray(currentSites) || currentSites.length === 0) {
+    updateAutoBackupUI();
+    return;
+  }
+
+  const backupData = {
+    timestamp: Date.now(),
+    dateStr: new Date().toLocaleString(),
+    sites: currentSites,
+    bgType: localStorage.getItem('bgType') || null,
+    bgValue: localStorage.getItem('bgValue') || null,
+    searchHistory: searchHistory
+  };
+
+  try {
+    localStorage.setItem('mySites_autoBackup', JSON.stringify(backupData));
+  } catch (e) {}
+
+  await saveBackupToIndexedDB(backupData);
+  updateAutoBackupUI(backupData);
+}
+
+async function getBestAvailableBackup() {
+  const localBackup = getLocalAutoBackup();
+  const idbBackup = await getBackupFromIndexedDB();
+
+  if (localBackup && idbBackup) {
+    return (localBackup.timestamp || 0) >= (idbBackup.timestamp || 0) ? localBackup : idbBackup;
+  }
+  return localBackup || idbBackup;
+}
+
+async function updateAutoBackupUI(providedBackup) {
+  const backup = providedBackup || await getBestAvailableBackup();
+  if (backup && Array.isArray(backup.sites) && backup.sites.length > 0) {
+    const timeFormatted = backup.dateStr || new Date(backup.timestamp).toLocaleString();
+    autoBackupStatus.textContent = `Автокопия: ${backup.sites.length} шт. (${timeFormatted})`;
+    restoreAutoBackupBtn.style.display = 'block';
+  } else {
+    autoBackupStatus.textContent = 'Автокопия: пока нет сохранённых копий';
+    restoreAutoBackupBtn.style.display = 'none';
+  }
+}
+
+async function checkAndPromptEmergencyRecovery() {
+  // If sites are empty, check if backup is available to save user data
+  if (sites.length === 0) {
+    const backup = await getBestAvailableBackup();
+    if (backup && Array.isArray(backup.sites) && backup.sites.length > 0) {
+      recoveryCount.textContent = backup.sites.length;
+      recoveryDate.textContent = backup.dateStr || new Date(backup.timestamp).toLocaleString();
+      recoveryBanner.style.display = 'flex';
+    }
+  }
+}
+
+recoveryRestoreBtn.onclick = async () => {
+  const backup = await getBestAvailableBackup();
+  if (backup && Array.isArray(backup.sites)) {
+    sites = [...backup.sites];
+    if (backup.bgType && backup.bgValue) {
+      localStorage.setItem('bgType', backup.bgType);
+      localStorage.setItem('bgValue', backup.bgValue);
+      applySavedBackground();
+    }
+    saveAndRender();
+    recoveryBanner.style.display = 'none';
+    showToast(`Восстановлено ${sites.length} ярлыков из резервной копии! 🎉`);
+  }
+};
+
+recoveryDismissBtn.onclick = () => {
+  recoveryBanner.style.display = 'none';
+};
+
+restoreAutoBackupBtn.onclick = async () => {
+  const backup = await getBestAvailableBackup();
+  if (!backup || !Array.isArray(backup.sites) || backup.sites.length === 0) {
+    alert('Нет доступной резервной копии.');
+    return;
+  }
+
+  const confirmMsg = `Восстановить ${backup.sites.length} ярлыков из автокопии от ${backup.dateStr || new Date(backup.timestamp).toLocaleString()}?\n(Текущие ярлыки будут заменены)`;
+  if (confirm(confirmMsg)) {
+    sites = [...backup.sites];
+    if (backup.bgType && backup.bgValue) {
+      localStorage.setItem('bgType', backup.bgType);
+      localStorage.setItem('bgValue', backup.bgValue);
+      applySavedBackground();
+    }
+    saveAndRender();
+    modal.style.display = 'none';
+    showToast(`Успешно восстановлено ${sites.length} ярлыков!`);
+  }
+};
+
+/* ==================== Export & Import JSON ==================== */
+exportBtn.onclick = () => {
+  if (sites.length === 0) {
+    if (!confirm('Список ярлыков пуст. Всё равно скачать файл?')) return;
+  }
+  const payload = {
+    app: 'MyStartPage',
+    version: 1,
+    exportDate: new Date().toISOString(),
+    sites: sites,
+    settings: {
+      bgType: localStorage.getItem('bgType') || null,
+      bgValue: localStorage.getItem('bgValue') || null
+    },
+    searchHistory: searchHistory
+  };
+
+  const jsonStr = JSON.stringify(payload, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `startpage_backup_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Резервная копия сохранена в файл!');
+};
+
+importTriggerBtn.onclick = () => {
+  importFileInput.value = '';
+  importFileInput.click();
+};
+
+importFileInput.onchange = (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    try {
+      const data = JSON.parse(event.target.result);
+      let importedSites = null;
+      let importedSettings = null;
+
+      if (Array.isArray(data)) {
+        importedSites = data;
+      } else if (data && Array.isArray(data.sites)) {
+        importedSites = data.sites;
+        if (data.settings) importedSettings = data.settings;
+        if (Array.isArray(data.searchHistory)) {
+          searchHistory = Array.from(new Set([...data.searchHistory, ...searchHistory])).slice(0, 15);
+          localStorage.setItem('mySearchHistory', JSON.stringify(searchHistory));
+        }
+      }
+
+      if (!importedSites) {
+        throw new Error('Файл не содержит корректного списка ярлыков.');
+      }
+
+      // Sanitize items
+      importedSites = importedSites.filter(item => item && (item.url || item.name)).map(item => ({
+        name: String(item.name || 'Сайт'),
+        url: String(item.url || ''),
+        icon: item.icon ? String(item.icon) : ''
+      }));
+
+      const shouldReplace = confirm(
+        `Найдено ${importedSites.length} ярлыков.\n\nНажмите ОК, чтобы ЗАМЕНИТЬ текущие ярлыки.\nНажмите Отмена, чтобы ОБЪЕДИНИТЬ с текущими.`
+      );
+
+      if (shouldReplace) {
+        sites = importedSites;
+      } else {
+        // Merge without duplicates by URL
+        const existingUrls = new Set(sites.map(s => s.url));
+        importedSites.forEach(item => {
+          if (!existingUrls.has(item.url)) {
+            sites.push(item);
+            existingUrls.add(item.url);
+          }
+        });
+      }
+
+      if (importedSettings) {
+        if (importedSettings.bgType && importedSettings.bgValue) {
+          localStorage.setItem('bgType', importedSettings.bgType);
+          localStorage.setItem('bgValue', importedSettings.bgValue);
+          applySavedBackground();
+        }
+      }
+
+      saveAndRender();
+      modal.style.display = 'none';
+      showToast(`Импортировано ярлыков: ${importedSites.length}!`);
+    } catch (err) {
+      alert('Ошибка при чтении файла JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+};
+
+/* ==================== Search Suggestions & Query ==================== */
 function updateSearchSuggestions() {
   searchSuggestions.innerHTML = '';
   const addedSuggestions = new Set();
@@ -414,196 +872,210 @@ searchForm.onsubmit = (e) => {
   }
 };
 
+/* ==================== Background Settings ==================== */
 function applySavedBackground() {
-const savedBgType = localStorage.getItem('bgType');
-const savedBgValue = localStorage.getItem('bgValue');
+  const savedBgType = localStorage.getItem('bgType');
+  const savedBgValue = localStorage.getItem('bgValue');
 
-if (savedBgType === 'image' && savedBgValue) {
-document.body.style.backgroundImage = "url('" + savedBgValue + "')";
-bgUrlInput.value = savedBgValue;
-} else if (savedBgType === 'color' && savedBgValue) {
-document.body.style.backgroundImage = 'none';
-document.body.style.backgroundColor = savedBgValue;
-bgColorPicker.value = savedBgValue;
-bgUrlInput.value = '';
-} else {
-document.body.style.backgroundImage = 'none';
-document.body.style.backgroundColor = '#121212';
-bgColorPicker.value = '#121212';
-bgUrlInput.value = '';
-}
+  if (savedBgType === 'image' && savedBgValue) {
+    document.body.style.backgroundImage = "url('" + savedBgValue + "')";
+    bgUrlInput.value = savedBgValue;
+  } else if (savedBgType === 'color' && savedBgValue) {
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = savedBgValue;
+    bgColorPicker.value = savedBgValue;
+    bgUrlInput.value = '';
+  } else {
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = '#121212';
+    bgColorPicker.value = '#121212';
+    bgUrlInput.value = '';
+  }
 }
 
 bgUrlInput.addEventListener('input', (e) => {
-const value = e.target.value.trim();
-if (value) {
-document.body.style.backgroundImage = "url('" + value + "')";
-localStorage.setItem('bgType', 'image');
-localStorage.setItem('bgValue', value);
-} else {
-const color = bgColorPicker.value;
-document.body.style.backgroundImage = 'none';
-document.body.style.backgroundColor = color;
-localStorage.setItem('bgType', 'color');
-localStorage.setItem('bgValue', color);
-}
+  const value = e.target.value.trim();
+  if (value) {
+    document.body.style.backgroundImage = "url('" + value + "')";
+    localStorage.setItem('bgType', 'image');
+    localStorage.setItem('bgValue', value);
+  } else {
+    const color = bgColorPicker.value;
+    document.body.style.backgroundImage = 'none';
+    document.body.style.backgroundColor = color;
+    localStorage.setItem('bgType', 'color');
+    localStorage.setItem('bgValue', color);
+  }
+  persistAutoBackup(sites);
 });
 
 bgColorPicker.addEventListener('input', (e) => {
-const color = e.target.value;
-document.body.style.backgroundImage = 'none';
-document.body.style.backgroundColor = color;
-bgUrlInput.value = '';
-localStorage.setItem('bgType', 'color');
-localStorage.setItem('bgValue', color);
+  const color = e.target.value;
+  document.body.style.backgroundImage = 'none';
+  document.body.style.backgroundColor = color;
+  bgUrlInput.value = '';
+  localStorage.setItem('bgType', 'color');
+  localStorage.setItem('bgValue', color);
+  persistAutoBackup(sites);
 });
 
 resetBgBtn.addEventListener('click', () => {
-localStorage.removeItem('bgType');
-localStorage.removeItem('bgValue');
-applySavedBackground();
+  localStorage.removeItem('bgType');
+  localStorage.removeItem('bgValue');
+  applySavedBackground();
+  persistAutoBackup(sites);
+  showToast('Фон сброшен');
 });
 
 applySavedBackground();
 
+/* ==================== Modal Handling ==================== */
 openModalBtn.onclick = () => {
-editIndex = -1;
-modalTitle.textContent = 'Новый ярлык';
-submitBtn.textContent = 'Добавить';
-nameInput.value = '';
-urlInput.value = '';
-iconInput.value = '';
-modal.style.display = 'flex';
+  editIndex = -1;
+  modalTitle.textContent = 'Новый ярлык';
+  submitBtn.textContent = 'Добавить';
+  nameInput.value = '';
+  urlInput.value = '';
+  iconInput.value = '';
+  updateAutoBackupUI();
+  modal.style.display = 'flex';
 };
 
 closeModalBtn.onclick = () => modal.style.display = 'none';
 window.onclick = (e) => {
-if (e.target === modal) modal.style.display = 'none';
+  if (e.target === modal) modal.style.display = 'none';
 };
 
+/* ==================== Grid Rendering ==================== */
 function render() {
-grid.innerHTML = '';
-sites.forEach((site, index) => {
-const container = document.createElement('div');
-container.className = 'tile-container';
-container.setAttribute('draggable', 'true');
-container.dataset.index = index;
+  grid.innerHTML = '';
+  sites.forEach((site, index) => {
+    const container = document.createElement('div');
+    container.className = 'tile-container';
+    container.setAttribute('draggable', 'true');
+    container.dataset.index = index;
 
-const a = document.createElement('a');
-a.href = site.url;
-a.className = 'tile';
+    const a = document.createElement('a');
+    a.href = site.url;
+    a.className = 'tile';
 
-const icon = document.createElement('span');
-icon.className = 'tile-icon';
+    const icon = document.createElement('span');
+    icon.className = 'tile-icon';
 
-if (site.icon) {
-icon.textContent = site.icon;
-} else {
-try {
-const urlObj = new URL(site.url);
-const img = document.createElement('img');
-img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + urlObj.hostname;
-img.alt = '';
-img.onerror = () => {
-icon.innerHTML = '';
-icon.textContent = site.name.charAt(0).toUpperCase();
-};
-icon.appendChild(img);
-} catch(e) {
-icon.textContent = site.name.charAt(0).toUpperCase();
-}
-}
+    if (site.icon) {
+      icon.textContent = site.icon;
+    } else {
+      try {
+        const urlObj = new URL(site.url);
+        const img = document.createElement('img');
+        img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + urlObj.hostname;
+        img.alt = '';
+        img.onerror = () => {
+          icon.innerHTML = '';
+          icon.textContent = site.name.charAt(0).toUpperCase();
+        };
+        icon.appendChild(img);
+      } catch(e) {
+        icon.textContent = site.name.charAt(0).toUpperCase();
+      }
+    }
 
-const title = document.createElement('span');
-title.className = 'tile-title';
-title.textContent = site.name;
+    const title = document.createElement('span');
+    title.className = 'tile-title';
+    title.textContent = site.name;
 
-const del = document.createElement('button');
-del.textContent = '×';
-del.className = 'action-btn delete-btn';
-del.title = 'Удалить';
-del.onclick = (e) => {
-e.preventDefault();
-sites.splice(index, 1);
-saveAndRender();
-};
+    const del = document.createElement('button');
+    del.textContent = '×';
+    del.className = 'action-btn delete-btn';
+    del.title = 'Удалить';
+    del.onclick = (e) => {
+      e.preventDefault();
+      sites.splice(index, 1);
+      saveAndRender();
+    };
 
-const edit = document.createElement('button');
-edit.textContent = '✎';
-edit.className = 'action-btn edit-btn';
-edit.title = 'Редактировать';
-edit.onclick = (e) => {
-e.preventDefault();
-editIndex = index;
-modalTitle.textContent = 'Редактировать ярлык';
-submitBtn.textContent = 'Сохранить';
-nameInput.value = site.name;
-urlInput.value = site.url;
-iconInput.value = site.icon || '';
-modal.style.display = 'flex';
-};
+    const edit = document.createElement('button');
+    edit.textContent = '✎';
+    edit.className = 'action-btn edit-btn';
+    edit.title = 'Редактировать';
+    edit.onclick = (e) => {
+      e.preventDefault();
+      editIndex = index;
+      modalTitle.textContent = 'Редактировать ярлык';
+      submitBtn.textContent = 'Сохранить';
+      nameInput.value = site.name;
+      urlInput.value = site.url;
+      iconInput.value = site.icon || '';
+      modal.style.display = 'flex';
+    };
 
-a.appendChild(icon);
-a.appendChild(title);
-container.appendChild(a);
-container.appendChild(del);
-container.appendChild(edit);
+    a.appendChild(icon);
+    a.appendChild(title);
+    container.appendChild(a);
+    container.appendChild(del);
+    container.appendChild(edit);
 
-container.addEventListener('dragstart', () => {
-draggedItem = container;
-container.classList.add('dragging');
-});
+    container.addEventListener('dragstart', () => {
+      draggedItem = container;
+      container.classList.add('dragging');
+    });
 
-container.addEventListener('dragend', () => {
-container.classList.remove('dragging');
-draggedItem = null;
-});
+    container.addEventListener('dragend', () => {
+      container.classList.remove('dragging');
+      draggedItem = null;
+    });
 
-container.addEventListener('dragover', (e) => {
-e.preventDefault();
-});
+    container.addEventListener('dragover', (e) => {
+      e.preventDefault();
+    });
 
-container.addEventListener('drop', (e) => {
-e.preventDefault();
-if (draggedItem && draggedItem !== container) {
-const fromIndex = parseInt(draggedItem.dataset.index);
-const toIndex = parseInt(container.dataset.index);
+    container.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (draggedItem && draggedItem !== container) {
+        const fromIndex = parseInt(draggedItem.dataset.index);
+        const toIndex = parseInt(container.dataset.index);
 
-const [movedItem] = sites.splice(fromIndex, 1);
-sites.splice(toIndex, 0, movedItem);
-saveAndRender();
-}
-});
+        const [movedItem] = sites.splice(fromIndex, 1);
+        sites.splice(toIndex, 0, movedItem);
+        saveAndRender();
+      }
+    });
 
-grid.appendChild(container);
-});
+    grid.appendChild(container);
+  });
 
-updateSearchSuggestions();
+  updateSearchSuggestions();
 }
 
 function saveAndRender() {
-localStorage.setItem('mySites', JSON.stringify(sites));
-render();
+  localStorage.setItem('mySites', JSON.stringify(sites));
+  persistAutoBackup(sites);
+  render();
 }
 
 form.onsubmit = (e) => {
-e.preventDefault();
-const siteData = {
-name: nameInput.value,
-url: urlInput.value,
-icon: iconInput.value
+  e.preventDefault();
+  const siteData = {
+    name: nameInput.value,
+    url: urlInput.value,
+    icon: iconInput.value
+  };
+
+  if (editIndex === -1) {
+    sites.push(siteData);
+  } else {
+    sites[editIndex] = siteData;
+  }
+  modal.style.display = 'none';
+  saveAndRender();
+  showToast(editIndex === -1 ? 'Ярлык добавлен' : 'Ярлык обновлен');
 };
 
-if (editIndex === -1) {
-sites.push(siteData);
-} else {
-sites[editIndex] = siteData;
-}
-modal.style.display = 'none';
-saveAndRender();
-};
-
+// Initial startup
 render();
+persistAutoBackup(sites);
+checkAndPromptEmergencyRecovery();
+updateAutoBackupUI();
 </script>
 </body>
 </html>
